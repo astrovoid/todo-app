@@ -1,0 +1,23 @@
+.header {
+    background: #fff;   
+
+    border-bottom: 1px solid #999;
+}
+
+.logo {
+    width: 40px;
+    
+    padding: 10px;
+
+    font-size: 30px;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+.logoLink {
+    color: #000;
+
+    text-decoration: none;
+}

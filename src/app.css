@@ -1,0 +1,11 @@
+body {
+    background: url('./bg.jpg') no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+
+    background: #fff;
+}

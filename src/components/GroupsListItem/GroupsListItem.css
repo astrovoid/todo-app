@@ -1,0 +1,12 @@
+.groupsItem{
+    width: 300px;
+    height: 70px;
+
+    padding: 10px;
+
+    border-bottom: 1px solid #000;
+}
+
+.groupsItem:hover {
+    cursor: pointer;
+}

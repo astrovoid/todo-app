@@ -32,13 +32,39 @@ class TodoFormContainer extends Component {
         this.props.addTodo(data);
     }
 
+    handleUpdateSumbit = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        let data = {}
+
+        formData.forEach((value, key) => {
+            data[key] = value;
+        })
+
+        data.groupId = data.group;
+
+        delete(data.group);
+
+        this.props.editTodo(data);
+    }
+
+    getTodoData = () => {
+        let todoId = this.props.modal.modalProps.todoId;
+
+        if (!todoId) return;
+   
+        return this.props.todos.find((todo) => todo.id === todoId);
+    }
+
     renderTemplate(modalType) {
         let action = modalType.split('_')[0],
-            groups = this.props.getGroups();
+            groups = this.props.groups;
 
         switch (action) {
             case ('ADD'): return <CreateTodo handleSubmit={this.handleAddSumbit} groups={groups} {...this.props}></CreateTodo>
-            case ('EDIT'): return <EditTodo {...this.props}></EditTodo>
+            case ('EDIT'): return <EditTodo handleSubmit={this.handleUpdateSumbit} todoData={this.getTodoData()} {...this.props}></EditTodo>
         }
     }
 
@@ -55,11 +81,8 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTodo: (data) => {
-            dispatch(todoActions.addTodo(data));
-            dispatch(modalActions.closeModal())
-        },
-        getGroups: () => dispatch(getGroups())
+        addTodo: (data) => {dispatch(todoActions.addTodo(data))},
+        editTodo: (data) => {dispatch(todoActions.editTodo(data))}
     }
 }
 

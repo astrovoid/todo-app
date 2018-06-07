@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactDOM from 'react-dom'
 
-
 import CreateTodo from '../components/TodosList/Forms/CreateTodo';
 import EditTodo from '../components/TodosList/Forms/EditTodo';
 
@@ -16,17 +15,17 @@ import TodoFormContainer from './TodoFormContainer';
 const MODAL_COMPONENTS = {
     'ADD_GROUP_MODAL': GroupFormContainer,
     'EDIT_GROUP_MODAL': GroupFormContainer,
-    'ADD_NOTE_MODAL': TodoFormContainer,
-    'EDIT_NOTE_MODAL': TodoFormContainer,
+    'ADD_TODO_MODAL': TodoFormContainer,
+    'EDIT_TODO_MODAL': TodoFormContainer,
     'DELETE_GROUP_MODAL': null,
-    'DELETE_NOTE_MODAL': null
+    'DELETE_TODO_MODAL': null
 }
 
 class ModalManager extends Component {
 
     setWrapperRef = (node) => {
         let modalBackgroundRef = ReactDOM.findDOMNode(node);
-        this.modalWindowRef = modalBackgroundRef ? modalBackgroundRef.firstChild: null;
+        this.modalWindowRef = modalBackgroundRef ? modalBackgroundRef.firstChild : null;
     }
 
     componentDidMount = () => {
@@ -49,15 +48,13 @@ class ModalManager extends Component {
 
         if (!modalType) return null;
 
-        const ModalData = MODAL_COMPONENTS[modalType]
+        const ModalTemplate = MODAL_COMPONENTS[modalType]
 
         return (
             <React.Fragment>
-                { this.props.modal.opened &&
-                    <Modal ref={this.setWrapperRef} {...this.props}>
-                        <ModalData {...this.props} />
-                    </Modal>
-                }
+                <Modal ref={this.setWrapperRef} {...this.props}>
+                    <ModalTemplate {...this.props} />
+                </Modal>
             </React.Fragment>
         );
     }

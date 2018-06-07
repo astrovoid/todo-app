@@ -1,9 +1,21 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
     background: url('./bg.jpg') no-repeat;
     background-size: cover;
 }
 
+#root {
+    height: 100%;
+}
+
 .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     max-width: 960px;
     margin: 0 auto;
 

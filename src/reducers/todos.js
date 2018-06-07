@@ -1,18 +1,31 @@
-const initialState = [];
+const initialState = []
 
 const todos = (state = initialState, action) => {
-    switch(action.type) {
-        case 'GET_TODOS': 
-            return state
+    switch (action.type) {
         case 'ADD_TODO':
-            return [...state, action.payload];
+            return [...state, action.payload]
+
         case 'EDIT_TODO':
-            return action.payload
+            return state.map((todo) => {
+                if (todo.id !== action.payload.id) return todo;
+
+                return Object.assign({}, todo, {
+                    title: action.payload.title,
+                    description: action.payload.description,
+                    groupId: action.payload.groupId
+                })
+            })
+
         case 'DELETE_TODO':
-            return state;
+            const index = state.findIndex(todo => todo.id === action.payload)
+
+            return [
+                ...state.slice(0, index),
+                ...state.slice(index + 1)
+            ]
         default:
             return state;
-    }   
+    }
 }
 
 export default todos;

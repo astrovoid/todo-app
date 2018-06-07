@@ -2,12 +2,17 @@ const initialState = [];
 
 const groups = (state = initialState, action) => {
     switch(action.type) {
-        case 'GET_GROUPS': 
-            return state
         case 'ADD_GROUP':
             return [...state, action.payload];
         case 'EDIT_GROUP':
-            return action.payload
+            return state.map((group) => {
+                if (group.id !== action.payload.id) return group;
+                
+                return Object.assign({}, group, {
+                    title: action.payload.title,
+                    description: action.payload.description
+                })
+            })
         case 'DELETE_GROUP':
             return state;
         default:

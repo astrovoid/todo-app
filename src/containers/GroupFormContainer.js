@@ -28,13 +28,35 @@ class GroupFormContainer extends Component {
         this.props.addGroup(data);
     }
 
+    handleUpdateSumbit = (event, id) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        let data = {};
+
+        formData.forEach((value, key) => {
+            data[key] = value;
+        })
+
+        this.props.editGroup(data);
+    }
+
+    getGroupData = () => {
+        let groupId = this.props.modal.modalProps.groupId;
+
+        if (!groupId) return;
+
+        return this.props.groups.find((group) => group.id == groupId);
+    }    
+
 
     renderTemplate(modalType) {
         let action = modalType.split('_')[0];
 
         switch (action) {
             case ('ADD'): return <CreateGroup handleSubmit={this.handleAddSumbit} {...this.props}></CreateGroup>
-            case ('EDIT'): return <EditGroup {...this.props}></EditGroup>
+            case ('EDIT'): return <EditGroup groupData={this.getGroupData()} handleSubmit={this.handleUpdateSumbit} {...this.props}></EditGroup>
         }
     }
 
@@ -51,13 +73,8 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addGroup: (data) => {
-            dispatch(groupActions.addGroup(data));
-            dispatch(modalActions.closeModal())
-        },
-        editGroup: (data) => {
-
-        }
+        addGroup: (data) => {dispatch(groupActions.addGroup(data))},
+        editGroup: (data) => {dispatch(groupActions.editGroup(data))}
     }
 }
 

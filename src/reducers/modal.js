@@ -1,6 +1,6 @@
 const initialState = {
     modalType: null,
-    opened: null
+    modalProps: null
 }
 
 const modal = (state = initialState, action) => {

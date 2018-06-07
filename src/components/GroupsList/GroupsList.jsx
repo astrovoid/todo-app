@@ -20,9 +20,15 @@ const GroupsList = (props) => {
             <div className="groups">
                 <ul className="groups-list">
                 {props.groups.map(({id, title, description}) => 
-                    <GroupsListItem key={id} title={title} description={description}></GroupsListItem>)
+                    <GroupsListItem
+                        key={id} 
+                        id={id}
+                        title={title} 
+                        description={description}
+                        
+                        openModal={props.openModal}
+                        />)
                 }
-                    
                 </ul>
             </div>
            

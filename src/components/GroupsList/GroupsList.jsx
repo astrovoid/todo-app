@@ -4,7 +4,7 @@ import GroupsListItem from '../GroupsListItem/GroupsListItem';
 
 import styles from './GroupsList.css';
 
-const GroupsList = (props) => {
+const GroupsList = props => {
     const { groups, openModal, filterByGroup } = props;
     
     return (

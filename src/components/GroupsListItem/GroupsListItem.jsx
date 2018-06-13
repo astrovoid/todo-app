@@ -1,22 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import React from 'react';
 
 import styles from './GroupsListItem.css';
-import { openModal } from '../../actions/modal';
 
-const GroupsListItem = (props) => {
-    const id = props.id;
-    const title = props.title;
-    const description = props.description;
-
-    const deleteGroup = props.deleteGroup;
+const GroupsListItem = (props) => { 
+    const { id, title, description, filterByGroup, openModal} = props;
     
     return (
-        <div className={styles.groupsItem}>
+        <li className={styles.groupsItem} onClick={() => filterByGroup(id)}>
             <div>{title}</div>
             <div>{description}</div>
-            <button onClick={() => props.openModal('EDIT_GROUP_MODAL', { groupId: id })}>Edit</button>
-        </div>
+            <button onClick={() => openModal('EDIT_GROUP_MODAL', { groupId: id })}>Edit</button>
+        </li>
     );
 }
 

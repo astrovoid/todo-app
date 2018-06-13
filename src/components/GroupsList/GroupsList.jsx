@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import GroupsListItem from '../GroupsListItem/GroupsListItem';
 
 import styles from './GroupsList.css';
 
 const GroupsList = (props) => {
-    let openModal = props.openModal;
+    const { groups, openModal, filterByGroup } = props;
     
     return (
         <div>
@@ -17,32 +17,24 @@ const GroupsList = (props) => {
                 Add group
             </button>
             </div>
+            <button onClick={() => filterByGroup(null)}>All todos</button>
             <div className="groups">
                 <ul className="groups-list">
-                {props.groups.map(({id, title, description}) => 
+                { groups.map(({ id, title, description }) => 
                     <GroupsListItem
                         key={id} 
                         id={id}
                         title={title} 
                         description={description}
                         
-                        openModal={props.openModal}
+                        openModal={openModal}
+                        filterByGroup={filterByGroup}
                         />)
                 }
                 </ul>
             </div>
-           
         </div>
     );
 }
 
 export default GroupsList;
-
-
-{/* <div className={styles.groupsList}>
-<ul className="default-groups">
-    <li>All Notes</li>
-    <li>Completed</li>
-    <li>Uncompleted</li>
-</ul>
-</div> */}

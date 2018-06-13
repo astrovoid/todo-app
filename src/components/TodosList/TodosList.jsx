@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import styles from './TodosList.css';
 import TodosListItem from '../TodosListItem/TodosListItem';
 import TodoDetail from '../TodoDetail/TodoDetail';
 
 const TodosList = (props) => {
-    let openModal = props.openModal,
-        activeTodo = props.activeTodo;
+    const { todos, activeTodo, openModal, visibilityTodo, handleToggle, todo, showTodo, deleteTodo} = props;
 
     return (
         <div className={styles.notesList}>
@@ -16,28 +15,42 @@ const TodosList = (props) => {
                     onClick={() => openModal('ADD_TODO_MODAL')}
                 >
                     Add Todo
-            </button>
+                </button>
+            </div>
+            <div>
+                <ul>
+                    <li onClick={() => visibilityTodo('ALL')}>All</li>
+                    <li onClick={() => visibilityTodo('COMPLETED')}>Completed</li>
+                    <li onClick={() => visibilityTodo('UNCOMPLETED')}>Uncompleted</li>
+                </ul>
             </div>
             <div>
                 <ul className="todoList">
-                    {props.todos.map(({ id, title }) =>
+                    {todos.map(({ id, title, completed }) =>
                         <TodosListItem
                             key={id}
                             id={id}
                             title={title}
-                            deleteTodo={props.deleteTodo}
-                            edit={props.todo}
 
-                            showTodo={props.showTodo}
-                            openModal={props.openModal}
+                            edit={todo}
+                            completed={completed}
+                            
+                            showTodo={showTodo}
+                            deleteTodo={deleteTodo}
+                            handleToggle={handleToggle}
+
+                            openModal={openModal}
                         />
                     )}
                 </ul>
             </div>
             <div>
-                { activeTodo ? 
-                    <TodoDetail data={activeTodo}/>: 
-                    <div><del>Vue.js</del> React is the best framework ever</div>    
+                {activeTodo ?
+                    <TodoDetail data={activeTodo} /> :
+                    <div>
+                        <del>Vue.js </del>
+                        React is the best framework ever
+                    </div>
                 }
             </div>
         </div>

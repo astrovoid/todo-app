@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import FormValidation from '../../../units/FormValidation';
+
+import validate from '../../../helpers/validate';
 
 const CreateTodo = (props) => {
+    const { groups, handleSubmit, title, description } = props;
+
     return (
         <div>
             <h3>Create todo</h3>
-            <form onSubmit={props.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
-                <input id="title" name="title" type="text" />
-
+                <input id="title" name="title" type="text" onBlur={title.onBlur} onChange={title.onChange}/>
+                { title.touched && title.error && <div>{title.error}</div>}
                 <label htmlFor="description">Description</label>
-                <input id="description" name="description" type="text" />
+                <input id="description" name="description" type="text" onBlur={description.onBlur} onChange={description.onChange}/>
+                { description.touched && description.error && <div>{description.error}</div> }
                 <label htmlFor="group">Group</label>
                 <select name="group" id="group">
-                    {props.groups.map(({ id, title}) => 
+                    {groups.map(({ id, title}) => 
                         <option key={id} value={id}>{title}</option>
                     )}
                 </select>
@@ -22,19 +29,9 @@ const CreateTodo = (props) => {
     );
 }
 
-export default CreateTodo;
+const validationOptions = {
+    fields: ['title', 'description'],
+    validate: validate
+}
 
-
-// handleSubmit(event) {
-//     event.preventDefault()
-//     const formData = new FormData(event.target);
-
-//     let data = {}
-
-//     formData.forEach((value, key) => {
-//         data[key] = value;
-//     })
-
-//     data.id = generateID();
-
-//     this.props.addNote(data);
+export default FormValidation(CreateTodo, validationOptions);

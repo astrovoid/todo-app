@@ -15,6 +15,14 @@ const todos = (state = initialState, action) => {
                     groupId: action.payload.groupId
                 })
             })
+        case 'TOGGLE_TODO':
+            return state.map((todo) => {
+                if (todo.id !== action.payload) return todo;
+
+                return Object.assign({}, todo, {
+                    completed: !todo.completed
+                })
+            })
 
         case 'DELETE_TODO':
             const index = state.findIndex(todo => todo.id === action.payload)

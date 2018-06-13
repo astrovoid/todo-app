@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 
-import CreateTodo from '../components/TodosList/Forms/CreateTodo';
-import EditTodo from '../components/TodosList/Forms/EditTodo';
-
-import * as modalActions from '../actions/modal';
+import { openModal, closeModal } from '../actions/modal';
 
 import Modal from '../components/Modal/Modal';
 import GroupFormContainer from './GroupFormContainer';
@@ -16,11 +12,8 @@ const MODAL_COMPONENTS = {
     'ADD_GROUP_MODAL': GroupFormContainer,
     'EDIT_GROUP_MODAL': GroupFormContainer,
     'ADD_TODO_MODAL': TodoFormContainer,
-    'EDIT_TODO_MODAL': TodoFormContainer,
-    'DELETE_GROUP_MODAL': null,
-    'DELETE_TODO_MODAL': null
+    'EDIT_TODO_MODAL': TodoFormContainer
 }
-
 class ModalManager extends Component {
 
     setWrapperRef = (node) => {
@@ -52,7 +45,7 @@ class ModalManager extends Component {
 
         return (
             <React.Fragment>
-                <Modal ref={this.setWrapperRef} {...this.props}>
+                <Modal ref={this.setWrapperRef} closeModal={this.props.closeModal}>
                     <ModalTemplate {...this.props} />
                 </Modal>
             </React.Fragment>
@@ -60,12 +53,15 @@ class ModalManager extends Component {
     }
 }
 
-
 const mapStateToProps = (state) => state;
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(modalActions, dispatch)
-
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openModal: () => dispatch(openModal()),
+        closeModal: () => dispatch(closeModal())
+    }
+}
+    
 export default connect(
     mapStateToProps,
     mapDispatchToProps

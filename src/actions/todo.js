@@ -2,17 +2,16 @@ export const ADD_TODO = 'ADD_TODO';
 export const EDIT_TODO = 'EDIT_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const GET_TODOS = 'GET_TODOS';
-export const SHOW_TODO = 'SHOW_TODO';
 
-export function addTodo({ id, title, description, groupId }) {
+export function addTodo({ id, title, description, groupId, completed }) {
     return {
         type: ADD_TODO,
         payload: {
             id,
             title,
             description,
-            groupId
+            groupId,
+            completed
         }
 
     }

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
 import styles from './Modal.css'
-
 class Modal extends Component {
     render() {
-        let closeModal = this.props.closeModal;
-
+        const { closeModal, children } = this.props;
+            
         return (
             <div className={styles.modalBackground}>
                 <div className={styles.modal}>
-                    {this.props.children}
+                    {children}
                     <button
                         onClick={() => closeModal()}
                         className={styles.closeModal}

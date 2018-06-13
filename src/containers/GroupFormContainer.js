@@ -1,43 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import CreateGroup from '../components/GroupsList/Forms/CreateGroup';
 import EditGroup from '../components/GroupsList/Forms/EditGroup';
 
 import * as groupActions from '../actions/group';
-import * as modalActions from '../actions/modal';
 
 import { generateID } from '../helpers/helpers';
 
 class GroupFormContainer extends Component {
 
-    handleAddSumbit = (event) => {
-        event.preventDefault();
+    form = null;
 
-        const formData = new FormData(event.target);
+    transformDataForm = (form) => {
+        const formData = new FormData(form);
 
         let data = {}
 
         formData.forEach((value, key) => {
             data[key] = value;
         })
+        
+        return data;
+    }
+
+    handleAddSumbit = (event) => {
+        event.preventDefault();
+
+        if (!this.form.validateOnSubmit()) return;
+
+        let data = this.transformDataForm(event.target);
 
         data.id = generateID();
 
         this.props.addGroup(data);
     }
 
-    handleUpdateSumbit = (event, id) => {
+    handleUpdateSumbit = (event) => {
         event.preventDefault();
 
-        const formData = new FormData(event.target);
+        if (!this.form.validateOnSubmit()) return;
 
-        let data = {};
-
-        formData.forEach((value, key) => {
-            data[key] = value;
-        })
+        let data = this.transformDataForm(event.target)
 
         this.props.editGroup(data);
     }
@@ -47,7 +51,7 @@ class GroupFormContainer extends Component {
 
         if (!groupId) return;
 
-        return this.props.groups.find((group) => group.id == groupId);
+        return this.props.groups.find((group) => group.id === groupId);
     }    
 
 
@@ -55,8 +59,19 @@ class GroupFormContainer extends Component {
         let action = modalType.split('_')[0];
 
         switch (action) {
-            case ('ADD'): return <CreateGroup handleSubmit={this.handleAddSumbit} {...this.props}></CreateGroup>
-            case ('EDIT'): return <EditGroup groupData={this.getGroupData()} handleSubmit={this.handleUpdateSumbit} {...this.props}></EditGroup>
+            case ('ADD'):
+                return <CreateGroup 
+                            ref={(node) => {this.form = node}} 
+                            handleSubmit={this.handleAddSumbit} 
+                            {...this.props}/>
+            case ('EDIT'): 
+                return <EditGroup 
+                            ref={(node) => {this.form = node}} 
+                            dataForEdit={this.getGroupData()} 
+                            handleSubmit={this.handleUpdateSumbit} 
+                            {...this.props}/>
+            default: 
+                return null;
         }
     }
 

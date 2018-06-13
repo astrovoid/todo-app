@@ -1,30 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const EditNote = ({ handleSubmit, todoData, groups }) => {  
+import FormValidation from '../../../units/FormValidation';
+
+import validate from '../../../helpers/validate';
+
+const EditNote = (props) => {
+    const { handleSubmit, dataForEdit, groups, title, description } = props;
+
     return (
         <div>
             <h3>Edit todo</h3>
             <form onSubmit={handleSubmit}>
-                <input id="id" name="id" type="hidden" value={todoData.id}/>
+                <input id="id" name="id" type="hidden" value={dataForEdit.id} />
                 <label htmlFor="title">Title</label>
-                <input id="title" name="title" type="text" defaultValue={todoData.title} />
-
+                <input id="title" name="title" type="text" defaultValue={dataForEdit.title} onBlur={title.onBlur} onChange={title.onChange} />
+                { title.touched && title.error && <div>{title.error}</div>}
                 <label htmlFor="description">Description</label>
-                <input id="description" name="description" type="text" defaultValue={todoData.description}/>
-
-                <br />
+                <input id="description" name="description" type="text" defaultValue={dataForEdit.description} onBlur={description.onBlur} onChange={description.onChange} />
+                { description.touched && description.error && <div>{description.error}</div> }
                 <label htmlFor="group">Group</label>
-                <select name="group" id="group" defaultValue={todoData.groupId}>
-                    {groups.map(({ id, title}) => 
-                            <option key={id} value={id}>{title}</option>
+                <select name="group" id="group" defaultValue={dataForEdit.groupId}>
+                    {groups.map(({ id, title }) =>
+                        <option key={id} value={id}>{title}</option>
                     )}
                 </select>
-
-                <br />
-                <input type="submit" value="Create" />
+                <input type="submit" value="Update" />
             </form>
         </div>
     );
 }
 
-export default EditNote;
+const validationOptions = {
+    fields: ['title', 'description'],
+    validate: validate
+}
+
+export default FormValidation(EditNote, validationOptions);

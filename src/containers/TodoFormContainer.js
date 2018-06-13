@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import CreateTodo from '../components/TodosList/Forms/CreateTodo';
 import EditTodo from '../components/TodosList/Forms/EditTodo';
 
-import { getGroups } from '../actions/group';
-import * as todoActions from '../actions/todo';
-import * as modalActions from '../actions/modal';
+import { addTodo, editTodo } from '../actions/todo';
 
 import { generateID } from '../helpers/helpers';
 
 class TodoFormContainer extends Component {
 
+    form = null;
+
     handleAddSumbit = (event) => {
         event.preventDefault();
+
+        if (!this.form.validateOnSubmit()) return;
 
         const formData = new FormData(event.target);
 
@@ -26,14 +27,18 @@ class TodoFormContainer extends Component {
 
         data.id = generateID();
         data.groupId = data.group;
-
+        
         delete(data.group);
+        
+        data.completed = false;
 
         this.props.addTodo(data);
     }
 
     handleUpdateSumbit = (event) => {
         event.preventDefault();
+
+        if (!this.form.validateOnSubmit()) return;
 
         const formData = new FormData(event.target);
 
@@ -63,15 +68,29 @@ class TodoFormContainer extends Component {
             groups = this.props.groups;
 
         switch (action) {
-            case ('ADD'): return <CreateTodo handleSubmit={this.handleAddSumbit} groups={groups} {...this.props}></CreateTodo>
-            case ('EDIT'): return <EditTodo handleSubmit={this.handleUpdateSumbit} todoData={this.getTodoData()} {...this.props}></EditTodo>
+            case ('ADD'): 
+                return <CreateTodo 
+                            ref={(node) => this.form = node}
+                            handleSubmit={this.handleAddSumbit} 
+                            groups={groups} 
+                            {...this.props}/>
+            case ('EDIT'): 
+                return <EditTodo 
+                            ref={(node) => this.form = node}
+                            handleSubmit={this.handleUpdateSumbit} 
+                            dataForEdit={this.getTodoData()} 
+                            {...this.props}/>
+            default: 
+                return null;
         }
     }
 
     render() {
+        const modalType = this.props.modal.modalType;
+
         return (
             <div>
-                {this.renderTemplate(this.props.modal.modalType)}
+                {this.renderTemplate(modalType)}
             </div>
         );
     }
@@ -81,8 +100,8 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTodo: (data) => {dispatch(todoActions.addTodo(data))},
-        editTodo: (data) => {dispatch(todoActions.editTodo(data))}
+        addTodo: (data) => { dispatch(addTodo(data)) },
+        editTodo: (data) => { dispatch(editTodo(data)) }
     }
 }
 

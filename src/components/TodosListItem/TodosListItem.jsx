@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import Checkbox from '../common/checkbox';
 
 const TodosListItem = (props) => {
-    const id = props.id;
+    const { id, title, completed, showTodo, handleToggle, deleteTodo, openModal } = props;
 
     return (
-        <li style={{ padding: '10px', borderBottom: '1px solid #000', cursor: 'pointer' }} onClick={() => props.showTodo(props.id)}>
-            {props.title}
-            <button onClick={() => props.openModal('EDIT_TODO_MODAL', { todoId: id })}>Edit</button>
-            <button onClick={() => props.deleteTodo(id)}>X</button>
+        <li style={{ padding: '10px', borderBottom: '1px solid #000', cursor: 'pointer' }} onClick={() => showTodo(id)}>
+            <Checkbox onChange={() => handleToggle(id)} checked={completed}/>
+            <div>{title}</div>
+            <button onClick={() => openModal('EDIT_TODO_MODAL', { todoId: id })}>Edit</button>
+            <button onClick={() => deleteTodo(id)}>X</button>
         </li>
     )
 };

@@ -10,7 +10,7 @@ class Main extends Component {
     render() {
         return (
             <div className={styles.main}>
-                <GroupContainer />
+                <GroupContainer className={styles.groups}/>
                 <TodoContainer />
                 <ModalManager />
             </div>

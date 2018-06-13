@@ -1,6 +1,6 @@
 import React from "react";
 
-import FormValidation from '../../../units/FormValidation';
+import FormValidation from '../../../hoc/FormValidation';
 
 import validate from '../../../helpers/validate';
 

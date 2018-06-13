@@ -25,13 +25,11 @@ class TodoContainer extends Component {
 
     render() {
         return (
-            <div>
-                <TodosList
-                    handleToggle={this.handleToggle}
-                    activeTodo={this.state.activeTodo}
-                    showTodo={this.showTodo}
-                    {...this.props} />
-            </div>
+            <TodosList
+                handleToggle={this.handleToggle}
+                activeTodo={this.state.activeTodo}
+                showTodo={this.showTodo}
+                {...this.props} />
         );
     }
 }
@@ -46,7 +44,7 @@ let mapStateToProps = (state) => {
                         return state;
                     case 'COMPLETED':
                         return state.filter(todo => todo.completed);
-        
+
                     case 'UNCOMPLETED':
                         return state.filter(todo => !todo.completed);
                     default:
@@ -61,10 +59,11 @@ let mapStateToProps = (state) => {
             else
                 todosList = state.todos
 
-            todosList =  getFilteredTodos(todosList, state.filter.visibleTodo);
+            todosList = getFilteredTodos(todosList, state.filter.visibleTodo);
 
             return todosList;
-        })(state)
+        })(state),
+        filter: state.filter
     }
 };
 

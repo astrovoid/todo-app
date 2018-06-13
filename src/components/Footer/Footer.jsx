@@ -5,7 +5,7 @@ import styles from './Footer.css'
 const Footer = () => {
     return (
         <footer className={styles.footer}>
-            Footer
+            Made with ❤️ for the React. 
         </footer>
     );
 };

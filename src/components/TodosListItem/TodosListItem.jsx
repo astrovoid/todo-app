@@ -2,13 +2,15 @@ import React from 'react';
 
 import Checkbox from '../common/checkbox';
 
+import styles from './TodosListItem.css';
+
 const TodosListItem = (props) => {
     const { id, title, completed, showTodo, handleToggle, deleteTodo, openModal } = props;
 
     return (
-        <li style={{ padding: '10px', borderBottom: '1px solid #000', cursor: 'pointer' }} onClick={() => showTodo(id)}>
+        <li styles={styles.todoItem} >
             <Checkbox onChange={() => handleToggle(id)} checked={completed}/>
-            <div>{title}</div>
+            <div className={styles.todoTitle}onClick={() => showTodo(id)}>{title}</div>
             <button onClick={() => openModal('EDIT_TODO_MODAL', { todoId: id })}>Edit</button>
             <button onClick={() => deleteTodo(id)}>X</button>
         </li>

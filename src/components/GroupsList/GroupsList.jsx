@@ -8,7 +8,7 @@ const GroupsList = props => {
     const { groups, openModal, filterByGroup } = props;
     
     return (
-        <div>
+        <div className={styles.groupSection}>
             <div className={styles.groupAction}>
             <button
                 className={styles.groupsButton}
@@ -17,10 +17,10 @@ const GroupsList = props => {
                 Add group
             </button>
             </div>
-            <button onClick={() => filterByGroup(null)}>All todos</button>
-            <div className="groups">
-                <ul className="groups-list">
-                { groups.map(({ id, title, description }) => 
+            <div className={styles.allTodos} onClick={() => filterByGroup(null)}>All todos</div>
+            <div>
+                <ul className={styles.groupsList}>
+                { groups.length > 0 ? groups.map(({ id, title, description }) => 
                     <GroupsListItem
                         key={id} 
                         id={id}
@@ -30,6 +30,7 @@ const GroupsList = props => {
                         openModal={openModal}
                         filterByGroup={filterByGroup}
                         />)
+                : <li>No groups</li>
                 }
                 </ul>
             </div>

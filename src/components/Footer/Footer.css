@@ -1,7 +1,11 @@
 .footer {
+    height: 40px;
+    padding: 20px;
+
     flex: 0 0 auto;
     
-    background: #000;
+    background: #1c1d1e;
 
     color: #fff;
+    
 }

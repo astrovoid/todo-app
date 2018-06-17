@@ -53,7 +53,11 @@ class ModalManager extends Component {
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => {
+    return {
+        modal: state.modal
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {

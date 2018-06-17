@@ -2,14 +2,38 @@ import React from 'react';
 
 import styles from './GroupsListItem.css';
 
-const GroupsListItem = (props) => { 
-    const { id, title, description, filterByGroup, openModal} = props;
-    
+import materialIcons from 'material-icons';
+
+const GroupsListItem = (props) => {
+    const { 
+        id, 
+        title, 
+        description, 
+        filterByGroup, 
+        openModal, 
+        active } = props;
+
     return (
-        <li className={styles.groupsItem} onClick={() => filterByGroup(id)}>
-            <div>{title}</div>
-            <div>{description}</div>
-            <button onClick={() => openModal('EDIT_GROUP_MODAL', { groupId: id })}>Edit</button>
+        <li className={[styles.group, active ? styles.active: null].join(" ")}>
+            <div
+                className={styles.info} 
+                onClick={() => filterByGroup(id)}>
+                <div>
+                    <span className={styles.infoTitle}>Title: </span>
+                    {title}
+                </div>
+                <div>
+                    <span className={styles.infoTitle}>Description: </span>
+                    {description}
+                </div>
+            </div>
+            <div className={styles.actions}>
+                <button className={styles.edit} onClick={() => openModal('EDIT_GROUP_MODAL', { groupId: id })}>
+                    <i className={materialIcons['material-icons']}>
+                        {'edit'}
+                    </i>
+                </button>
+            </div>
         </li>
     );
 }

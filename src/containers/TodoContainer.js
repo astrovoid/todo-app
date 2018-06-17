@@ -5,7 +5,10 @@ import { openModal } from '../actions/modal';
 import { deleteTodo, toggleTodo } from '../actions/todo';
 import { filterByCompleted } from '../actions/filter';
 
-import TodosList from '../components/TodosList/TodosList';
+import TodoList from '../components/TodoList/TodoList';
+
+import { getTodos } from '../selectors/todo';
+
 class TodoContainer extends Component {
     state = {
         activeTodo: null
@@ -19,14 +22,10 @@ class TodoContainer extends Component {
         })
     }
 
-    handleToggle = (id) => {
-        this.props.toggleTodo(id)
-    }
-
     render() {
         return (
-            <TodosList
-                handleToggle={this.handleToggle}
+            <TodoList
+                toggleTodo={this.props.toggleTodo}
                 activeTodo={this.state.activeTodo}
                 showTodo={this.showTodo}
                 {...this.props} />
@@ -36,33 +35,7 @@ class TodoContainer extends Component {
 
 let mapStateToProps = (state) => {
     return {
-        todos: ((state) => {
-
-            const getFilteredTodos = (state, filter) => {
-                switch (filter) {
-                    case 'ALL':
-                        return state;
-                    case 'COMPLETED':
-                        return state.filter(todo => todo.completed);
-
-                    case 'UNCOMPLETED':
-                        return state.filter(todo => !todo.completed);
-                    default:
-                        return state;
-                }
-            }
-
-            let todosList = []
-
-            if (state.filter.filterTodoByGroup)
-                todosList = state.todos.filter((todo) => todo.groupId === state.filter.filterTodoByGroup)
-            else
-                todosList = state.todos
-
-            todosList = getFilteredTodos(todosList, state.filter.visibleTodo);
-
-            return todosList;
-        })(state),
+        todos: getTodos(state),
         filter: state.filter
     }
 };

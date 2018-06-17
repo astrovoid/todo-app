@@ -1,5 +1,5 @@
-const ADD_GROUP = 'ADD_GROUP';
-const EDIT_GROUP = 'EDIT_GROUP';
+export const ADD_GROUP = 'ADD_GROUP';
+export const EDIT_GROUP = 'EDIT_GROUP';
 
 export function addGroup ({ id, title, description }) {
     return {

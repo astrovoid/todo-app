@@ -84,7 +84,11 @@ class GroupFormContainer extends Component {
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => {
+    return {
+        groups: state.groups
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {

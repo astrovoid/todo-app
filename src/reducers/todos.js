@@ -1,11 +1,13 @@
+import { ADD_TODO, EDIT_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/todo';
+
 const initialState = []
 
 const todos = (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case ADD_TODO:
             return [...state, action.payload]
 
-        case 'EDIT_TODO':
+        case EDIT_TODO:
             return state.map((todo) => {
                 if (todo.id !== action.payload.id) return todo;
 
@@ -15,7 +17,7 @@ const todos = (state = initialState, action) => {
                     groupId: action.payload.groupId
                 })
             })
-        case 'TOGGLE_TODO':
+        case TOGGLE_TODO:
             return state.map((todo) => {
                 if (todo.id !== action.payload) return todo;
 
@@ -24,7 +26,7 @@ const todos = (state = initialState, action) => {
                 })
             })
 
-        case 'DELETE_TODO':
+        case DELETE_TODO:
             const index = state.findIndex(todo => todo.id === action.payload)
 
             return [
@@ -37,3 +39,4 @@ const todos = (state = initialState, action) => {
 }
 
 export default todos;
+

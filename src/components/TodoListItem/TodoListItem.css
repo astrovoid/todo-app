@@ -1,0 +1,61 @@
+.todo {
+    position: relative;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+.todo:hover {
+    background: #d9e2de;
+
+    cursor: pointer;
+}
+
+.active {
+    background: #d9e2de;
+}
+
+.info {
+    width: 100%;
+    padding: 10px 70px 10px 40px;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.edit {
+    composes: smallButton from '../../styles/button.css';
+    
+    right: 40px;
+}
+
+.edit:hover {
+    background: blue;
+}
+
+.delete {
+    composes: smallButton from '../../styles/button.css';
+
+    right: 10px;
+}
+
+.delete:hover {
+    background: red;
+}
+
+.checkbox {
+    position: absolute;
+
+    left: 5px; 
+    top: calc(50% - 12px)
+}
+
+.actions {
+    position: absolute;
+
+    top: calc(50% - 16px);
+    right: 10px;
+}

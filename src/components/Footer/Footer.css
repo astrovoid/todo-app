@@ -7,5 +7,14 @@
     background: #1c1d1e;
 
     color: #fff;
-    
+}
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    color: red;
+    font-size: 16px;
 }

@@ -1,10 +1,12 @@
+import { ADD_GROUP, EDIT_GROUP } from '../actions/group';
+
 const initialState = [];
 
 const groups = (state = initialState, action) => {
     switch(action.type) {
-        case 'ADD_GROUP':
+        case ADD_GROUP:
             return [...state, action.payload];
-        case 'EDIT_GROUP':
+        case EDIT_GROUP:
             return state.map((group) => {
                 if (group.id !== action.payload.id) return group;
                 
@@ -13,8 +15,6 @@ const groups = (state = initialState, action) => {
                     description: action.payload.description
                 })
             })
-        case 'DELETE_GROUP':
-            return state;
         default:
             return state;
     }   

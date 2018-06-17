@@ -1,0 +1,77 @@
+.todoSection {
+    width: 75%;
+    display: flex;
+}
+
+.todos {
+    width: 50%;
+    padding: 0 5px;
+}
+
+.todoList {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.activeTodo {
+    width: 50%;
+
+    padding: 5px 20px 20px 20px;
+}
+
+.todoViewTitle {
+
+    margin: 0 30% 20px 30%;
+
+    border-bottom: 5px solid #33e863;
+    
+    font-size: 20px;
+
+    text-align: center; 
+}
+
+.placeholder {
+    text-align: center;
+}
+
+.filter {
+    width: 100%;
+    padding: 7px 0;
+    
+    text-align: center;
+
+    cursor: pointer;
+
+    background: #777;
+    color: #fff;
+}
+
+.active {
+    background: #22be34;
+
+    border-bottom: 2px solid #333;    
+}
+
+.filterGroup {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.placeholder {
+    text-align: center;
+    color: #999;
+
+    margin: 30px;
+}

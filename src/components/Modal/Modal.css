@@ -1,12 +1,12 @@
-.modalBackground {
+.background {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 5px;
+    left: 5px;
 
     width: 100vmax;
     height: 100vmax;
 
-    background: rgba(0,0,0, 0.5);    
+    background: rgba(0,0,0, 0.5);  
 }
 
 .modal {
@@ -14,19 +14,21 @@
     top: calc(50% - 300px);
     left: calc(50% - 150px);
     
-    width: 300px;
-    height: 300px;
+    min-width: 300px;
 
     padding: 15px;
 
-    background: lightblue;
+    background: #fff;
+
+    border-radius: 0.3rem
 }
 
-.closeModal {
+.close {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 3px;
+    top: 2px;
 
+    display: flex;
     padding: 5px;
 
     color: #fff;
@@ -36,6 +38,6 @@
     background: red;
 }
 
-.closeModal:hover {
+.close:hover {
     cursor: pointer;
 }

@@ -16,10 +16,10 @@ const FormValidation = (WrapppedComponent, options) => {
         }, { fields: {} })
 
         onBlur = (field) => {
-            let fields = this.state.fields;
+            let fields = Object.assign({}, this.state.fields);;
 
             fields[field].touched = true;
-
+            
             this.setState({
                 fields: fields
             })
@@ -28,24 +28,26 @@ const FormValidation = (WrapppedComponent, options) => {
         }
         
         onChange = (field, event) => {
-            let fields = this.state.fields;
-            
+            let fields = Object.assign({}, this.state.fields);
+
             fields[field].value = event.target.value.trim();
-
+            
             this.setState({
-                fields: fields  
+                fields: fields
             })
-
+            
             this.validateFields();
         }
 
         validateFields = () => {
-            this.setState(this.validateRules(this.state.fields))
+            this.setState({
+                fields: this.validateRules(this.state.fields)
+            })
         }
 
         validateOnSubmit = () => {
             let validated = true,
-                fields = this.state.fields;
+                fields = Object.assign({}, this.state.fields);
             
             this.validateFields();
 
@@ -67,7 +69,7 @@ const FormValidation = (WrapppedComponent, options) => {
         }
 
         setGroupDataOnState(data) {
-            let fields = this.state.fields;
+            let fields = Object.assign({}, this.state.fields);
 
             for (let field in fields) {
                 fields[field].value = data[field]

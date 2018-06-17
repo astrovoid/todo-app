@@ -1,0 +1,57 @@
+.button {
+    border: none;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+    
+    padding: 10px;
+
+    color: #fff;
+}
+
+.submit {
+    background: rgb(22, 120, 194);
+}
+
+.submit:hover {
+    background: color(rgb(22, 120, 194) l(50%));
+}
+
+.smallButton {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 5px;
+
+    background: none;
+
+    cursor: pointer;
+}
+
+.smallButton:hover {
+    box-shadow: none;
+    color: #fff;
+}
+
+.smallButton i {
+    padding: 2px;
+}
+
+.addButton {
+  height: 30px;
+
+  color: #fff;
+
+  border-radius: 20px;
+
+  border: 0;
+  background: #276cda;
+}
+
+.addButton:hover {
+  cursor: pointer;
+
+  background: color(#276cda b(50%));
+}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import CreateTodo from '../components/TodosList/Forms/CreateTodo';
-import EditTodo from '../components/TodosList/Forms/EditTodo';
+import CreateTodo from '../components/TodoList/Forms/CreateTodo';
+import EditTodo from '../components/TodoList/Forms/EditTodo';
 
 import { addTodo, editTodo } from '../actions/todo';
 
@@ -12,25 +12,29 @@ class TodoFormContainer extends Component {
 
     form = null;
 
-    handleAddSumbit = (event) => {
-        event.preventDefault();
-
-        if (!this.form.validateOnSubmit()) return;
-
-        const formData = new FormData(event.target);
+    transformDataForm = (form) => {
+        const formData = new FormData(form);
 
         let data = {}
 
         formData.forEach((value, key) => {
             data[key] = value;
         })
+        
+        return data;
+    }
+
+    handleAddSumbit = (event) => {
+        event.preventDefault();
+
+        if (!this.form.validateOnSubmit()) return;
+
+        let data = this.transformDataForm(event.target);
 
         data.id = generateID();
         data.groupId = data.group;
         
         delete(data.group);
-        
-        data.completed = false;
 
         this.props.addTodo(data);
     }
@@ -40,16 +44,10 @@ class TodoFormContainer extends Component {
 
         if (!this.form.validateOnSubmit()) return;
 
-        const formData = new FormData(event.target);
-
-        let data = {}
-
-        formData.forEach((value, key) => {
-            data[key] = value;
-        })
+        let data = this.transformDataForm(event.target)
 
         data.groupId = data.group;
-
+        
         delete(data.group);
 
         this.props.editTodo(data);
@@ -96,7 +94,13 @@ class TodoFormContainer extends Component {
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => {
+    return {
+        modal: state.modal,
+        groups: state.groups,
+        todos: state.todos
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {

@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { editGroup } from '../actions/group';
@@ -6,15 +5,13 @@ import { openModal } from '../actions/modal';
 import { filterByGroup } from '../actions/filter';
 
 import GroupsList from '../components/GroupsList/GroupsList';
-class GroupContainer extends Component {
-    render() {
-        return (
-            <GroupsList {...this.props}></GroupsList>
-        );
-    }
-}
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => {
+    return {
+        groups: state.groups,
+        filter: state.filter
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -27,4 +24,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(GroupContainer);
+)(GroupsList);

@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 
 import styles from './Modal.css'
+
+import materialIcons from 'material-icons';
 class Modal extends Component {
     render() {
-        const { closeModal, children } = this.props;
+        const { 
+            closeModal, 
+            children } = this.props;
             
         return (
-            <div className={styles.modalBackground}>
+            <div className={styles.background}>
                 <div className={styles.modal}>
                     {children}
                     <button
                         onClick={() => closeModal()}
-                        className={styles.closeModal}
+                        className={styles.close}
                     >
-                    X
+                        <i className={materialIcons['material-icons']}>{'close'}</i>
                     </button>
                 </div>
             </div>

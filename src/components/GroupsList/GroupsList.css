@@ -2,16 +2,6 @@
   width: 25%;
 }
 
-.groupsButton {
-  width: 100%;
-  height: 30px;
-
-  color: #fff;
-
-  border: 0;
-  background: #49ff5f;
-}
-
 .groupsList {
     list-style: none;
 
@@ -19,21 +9,30 @@
     padding: 0;
 }
 
-.groupsButton:hover {
-  cursor: pointer;
-}
-
 .allTodos {
-    margin: 15px 0 0 0;
-    padding: 20px;
+    padding: 8px;
 
-    background: #49ff5f;
+    background: #22be34;
 
+    color: #fff;
     text-align: center;
 
     cursor: pointer;
 }
 
 .allTodos:hover {
-    background: #e9f934;
+    background: color(#22be34 b(15%));
+}
+
+.header  {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.placeholder {
+    text-align: center;
+    color: #999;
+
+    margin: 30px;
 }

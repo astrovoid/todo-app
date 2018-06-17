@@ -1,3 +1,5 @@
+import { FILTER_BY_GROUP, FILTER_BY_COMPLETED } from '../actions/filter';
+
 const initialState = {
     filterTodoByGroup: null,
     visibleTodo: 'ALL'
@@ -5,11 +7,11 @@ const initialState = {
 
 const filter = (state = initialState, action) => {
     switch(action.type){
-        case('FILTER_BY_GROUP'):
+        case FILTER_BY_GROUP:
             return Object.assign({}, state, {
                 filterTodoByGroup: action.payload
             })
-        case('FILTER_BY_COMPLETED'):
+        case FILTER_BY_COMPLETED:
             return Object.assign({}, state, {
                 visibleTodo: action.payload
             })

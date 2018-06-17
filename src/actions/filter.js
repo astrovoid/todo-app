@@ -1,5 +1,5 @@
-const FILTER_BY_GROUP = 'FILTER_BY_GROUP';
-const FILTER_BY_COMPLETED = 'FILTER_BY_COMPLETED';
+export const FILTER_BY_GROUP = 'FILTER_BY_GROUP';
+export const FILTER_BY_COMPLETED = 'FILTER_BY_COMPLETED';
 
 export const filterByGroup = (id) => {
     return {
